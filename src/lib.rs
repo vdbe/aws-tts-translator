@@ -1,14 +1,14 @@
-use std::{str::FromStr, path::PathBuf};
+use std::{path::PathBuf, str::FromStr};
 
-use tokio::{fs::File, io::AsyncWriteExt};
-use tokio_stream::StreamExt;
-use bytes::Bytes;
 use aws_sdk_polly::{
     model::{Engine as PollyEngine, Gender as PollyGender, LanguageCode, OutputFormat},
     Client as PollyClient,
 };
 use aws_sdk_translate::Client as TranslateClient;
+use bytes::Bytes;
 use clap::ValueEnum;
+use tokio::{fs::File, io::AsyncWriteExt};
+use tokio_stream::StreamExt;
 
 pub use error::Error;
 
@@ -122,7 +122,9 @@ pub async fn text_to_speech(
                 .send()
                 .await?;
 
-            let mut file = File::create(output_file).await.expect("Unable to output file");
+            let mut file = File::create(output_file)
+                .await
+                .expect("Unable to output file");
             let mut stream = ret.audio_stream;
             while let Some(bytes) = stream.next().await {
                 let bytes: Bytes = bytes.map_err(Error::unhandled)?;
@@ -130,10 +132,8 @@ pub async fn text_to_speech(
             }
 
             file.flush().await.map_err(Error::unhandled)?;
-
         }
     }
 
     Ok(())
 }
-

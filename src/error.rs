@@ -23,7 +23,7 @@ where
 {
     fn from(source: SdkError<T>) -> Self {
         // TODO: Catch permission errors
-        
+
         dbg!(&source);
 
         Self::unhandled(source)
