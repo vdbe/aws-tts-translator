@@ -1,0 +1,17 @@
+[package]
+name = "tts-translator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aws-config = "0.52"
+aws-sdk-translate = "0.22"
+aws-sdk-polly = "0.22"
+bytes = "1"
+clap = { version = "4", features = [ "derive", "env" ] }
+thiserror = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tokio-stream = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
