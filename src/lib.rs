@@ -125,6 +125,7 @@ pub async fn text_to_speech(
             let mut file = File::create(output_file)
                 .await
                 .expect("Unable to output file");
+
             let mut stream = ret.audio_stream;
             while let Some(bytes) = stream.next().await {
                 let bytes: Bytes = bytes.map_err(Error::unhandled)?;
