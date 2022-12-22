@@ -18,7 +18,7 @@ struct Args {
     language_code: String,
 
     /// Text to be translated
-    #[arg(short, long, default_value = "Hello, World!")]
+    #[arg(short, long, default_value = "Hello, world!")]
     text: String,
 
     /// Name of the tts voice
